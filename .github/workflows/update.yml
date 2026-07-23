@@ -1,0 +1,41 @@
+name: Mise à jour des foyers actifs
+
+on:
+  schedule:
+    # Tous les jours à 05:00 UTC (06:00 heure de Tunis)
+    - cron: '0 5 * * *'
+  workflow_dispatch: {}   # permet un lancement manuel depuis l'onglet Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-fires
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Récupérer les données NASA FIRMS
+        env:
+          FIRMS_MAP_KEY: ${{ secrets.FIRMS_MAP_KEY }}
+        run: python3 scripts/fetch_fires.py
+
+      - name: Publier les données mises à jour
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/fires.json
+          if git diff --staged --quiet; then
+            echo "Aucun changement à publier."
+          else
+            git commit -m "Données FIRMS — $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

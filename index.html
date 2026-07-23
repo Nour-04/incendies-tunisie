@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Incendies en Tunisie — Foyers actifs par satellite</title>
+  <meta name="description" content="Suivi quotidien des foyers actifs (feux de forêt et de végétation) détectés par satellite en Tunisie, par gouvernorat. Données NASA FIRMS." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="titles">
+        <h1>🔥 Incendies en Tunisie</h1>
+        <p class="subtitle">Foyers actifs détectés par satellite — mise à jour quotidienne</p>
+      </div>
+      <div class="updated" id="updated" aria-live="polite">Chargement…</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="controls" aria-label="Période">
+      <div class="toggle" role="group" aria-label="Choisir la période">
+        <button type="button" class="toggle-btn is-active" data-window="24h" aria-pressed="true">Dernières 24&nbsp;h</button>
+        <button type="button" class="toggle-btn" data-window="5j" aria-pressed="false">5 derniers jours</button>
+      </div>
+    </section>
+
+    <section class="stats" id="stats" aria-label="Chiffres clés"></section>
+
+    <div class="layout">
+      <section class="map-panel" aria-label="Carte des foyers actifs">
+        <div id="map"></div>
+        <div class="legend" aria-hidden="false">
+          <span class="legend-title">Intensité (puissance radiative)</span>
+          <span class="legend-item"><i class="dot sev-low"></i> Faible</span>
+          <span class="legend-item"><i class="dot sev-mid"></i> Modérée</span>
+          <span class="legend-item"><i class="dot sev-high"></i> Élevée</span>
+        </div>
+      </section>
+
+      <section class="rank-panel" aria-label="Régions les plus touchées">
+        <h2>Régions les plus touchées</h2>
+        <p class="rank-hint">Cliquez sur un gouvernorat pour voir les délégations concernées.</p>
+        <ol class="rank-list" id="rankList"></ol>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>
+        Source des données : <strong>NASA FIRMS</strong> — détections VIIRS (satellites S-NPP, NOAA-20, NOAA-21),
+        temps quasi réel. Chaque point est une <em>détection thermique</em> par satellite, pas nécessairement un
+        incendie distinct confirmé au sol.
+      </p>
+      <p>
+        Frontières administratives : <a href="https://www.geoboundaries.org" target="_blank" rel="noopener">geoBoundaries</a> (ODbL).
+        Ce site est un outil d'information et ne remplace pas les communications officielles de la Protection civile.
+        En cas d'urgence, appelez le <strong>198</strong>.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Éditeurs
+.vscode/
+.idea/
+
+# Fichiers temporaires
+*.log
