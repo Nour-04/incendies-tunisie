@@ -1,4 +1,4 @@
-# 🔥 Incendies en Tunisie
+# Incendies en Tunisie
 
 Site web qui affiche, **gouvernorat par gouvernorat**, les foyers actifs (feux de
 forêt et de végétation) détectés par satellite en Tunisie. Les données proviennent
